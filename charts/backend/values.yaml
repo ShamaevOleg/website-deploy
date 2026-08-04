@@ -1,0 +1,35 @@
+replicaCount: 1
+
+image:
+  repository: 474013238842.dkr.ecr.eu-west-2.amazonaws.com/website/backend
+  pullPolicy: IfNotPresent
+  tag: d555939ffa230c3c7ffb5e81b4a978d094a43bc0
+
+
+service:
+  type: ClusterIP
+  port: 8000
+
+containerPort: 8000
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+env:
+  DEBUG: "False"
+  ALLOWED_HOSTS: "*"
+  POSTGRES_DB: "remni"
+  POSTGRES_USER: "postgres"
+  POSTGRES_HOST: "PLACEHOLDER_RDS_ENDPOINT"
+  POSTGRES_PORT: "5432"
+
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxUnavailable: 0
+    maxSurge: 20%
