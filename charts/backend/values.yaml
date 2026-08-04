@@ -25,7 +25,7 @@ env:
   ALLOWED_HOSTS: "*"
   POSTGRES_DB: "remni"
   POSTGRES_USER: "postgres"
-  POSTGRES_HOST: "PLACEHOLDER_RDS_ENDPOINT"
+  POSTGRES_HOST: "db-instance-for-backend.cz2c6sacocxn.eu-west-2.rds.amazonaws.com"
   POSTGRES_PORT: "5432"
 
 strategy:
