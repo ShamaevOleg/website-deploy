@@ -32,6 +32,12 @@ spec:
           envFrom:
           - configMapRef:
               name: {{ .Chart.Name }}
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rds-password
+                  key: POSTGRES_PASSWORD
           livenessProbe:
             httpGet:
               path: /healthz
