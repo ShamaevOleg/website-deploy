@@ -21,6 +21,7 @@ spec:
         - name: redis
           securityContext:
             runAsNonRoot: true
+            runAsUser: 999
           image: "redis:{{ .Values.image.version }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
