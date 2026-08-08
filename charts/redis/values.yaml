@@ -1,0 +1,27 @@
+replicaCount: 1
+image:
+  version: 7.0-alpine
+  pullPolicy: IfNotPresent
+
+containerPort: 6379
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 256Mi
+
+service:
+  port: 6379
+  type: ClusterIP
+
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxUnavailable: 0
+    maxSurge: 20%
+
+configmap:
+  REDIS_URL: redis://redis:6379/1
