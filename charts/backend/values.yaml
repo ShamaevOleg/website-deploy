@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: 474013238842.dkr.ecr.eu-west-2.amazonaws.com/website/backend
   pullPolicy: IfNotPresent
-  tag: a732e1f5c63eae5efeb48d0848a7db67804b7728
+  tag: 131823d69c02ba67dc04e8a7862e810501b4b90c
 
 
 service:
