@@ -13,6 +13,9 @@ spec:
     matchLabels:
       app: {{ .Chart.Name }}
   template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
     spec:
       containers:
         - name: redis
