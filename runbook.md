@@ -117,7 +117,7 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   --set clusterName=eks_cluster_example \
   --set serviceAccount.create=true \
   --set serviceAccount.name=aws-load-balancer-controller \
-  --set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"="<ARN of IAM role for ALB>" \
+  --set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"="arn:aws:iam::474013238842:role/aws-load-balancer-controller" \
   --set region=eu-west-2 \
   --set vpcId=<common VPC ID>
 ```
