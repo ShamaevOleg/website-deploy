@@ -106,6 +106,22 @@ ClusterSecretStore doesn't exist yet, `remoteRef.key` no longer matches the
 secret name (the name carries the RDS instance UUID and changes if the database
 was recreated), or the IRSA role can't read that secret ARN.
 
+## 5. Install LoadBalancerControlles
+
+```
+helm repo add eks https://aws.github.io/eks-charts
+helm repo update
+
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
+  --namespace kube-system \
+  --set clusterName=eks_cluster_example \
+  --set serviceAccount.create=true \
+  --set serviceAccount.name=aws-load-balancer-controller \
+  --set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"="<ARN of IAM role for ALB>" \
+  --set region=eu-west-2 \
+  --set vpcId=<common VPC ID>
+```
+
 ## 6. Tear down (in reverse)
 
 Argo and ESO live in the cluster, so destroying the cluster removes them — no
