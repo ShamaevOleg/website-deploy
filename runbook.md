@@ -93,12 +93,12 @@ Then Sync in the Argo UI (or set them to auto-sync).
 
 ```bash
 # ESO synced the secret out of Secrets Manager
-kubectl get externalsecret -n remni-backend          # STATUS SecretSynced, READY True
-kubectl get secret rds-password -n remni-backend
+kubectl get externalsecret -n remni-website          # STATUS SecretSynced, READY True
+kubectl get secret rds-password -n remni-website
 
 # the app pod is up and connected to RDS
-kubectl get pods -n remni-backend -w                 # Ready 1/1
-kubectl logs -n remni-backend <pod>                  # gunicorn workers hold, no DB errors
+kubectl get pods -n remni-website -w                 # Ready 1/1
+kubectl logs -n remni-website <pod>                  # gunicorn workers hold, no DB errors
 ```
 
 If the ExternalSecret shows `SecretSyncedError`, the usual causes are: the
@@ -133,5 +133,5 @@ Both empty → nothing is billing.
 - **RDS secret name changes on recreation.** `remoteRef.key` in the
   ExternalSecret carries the instance UUID. If the database is recreated, update
   the key (or move to a fixed secret name — parked decision).
-- **App namespace is `remni-backend`** — SecretStore target and the pod must
+- **App namespace is `remni-website`** — SecretStore target and the pod must
   share it.

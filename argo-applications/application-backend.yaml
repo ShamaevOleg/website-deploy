@@ -11,7 +11,7 @@ spec:
     path: charts/backend
   destination:
     server: https://kubernetes.default.svc
-    namespace: remni-backend
+    namespace: remni-website
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
