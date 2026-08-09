@@ -119,7 +119,7 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   --set serviceAccount.name=aws-load-balancer-controller \
   --set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"="arn:aws:iam::474013238842:role/aws-load-balancer-controller" \
   --set region=eu-west-2 \
-  --set vpcId=<common VPC ID>
+  --set vpcId=vpc-05663472ab0ff866b
 ```
 
 ## 6. Tear down (in reverse)

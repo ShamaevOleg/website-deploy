@@ -24,3 +24,7 @@ strategy:
   rollingUpdate:
     maxUnavailable: 0
     maxSurge: 20%
+
+tls:
+  certificate:
+    arn: arn:aws:acm:eu-west-2:474013238842:certificate/2de06c5b-386d-4d22-a2da-cbfd2027b166
