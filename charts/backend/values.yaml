@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: 474013238842.dkr.ecr.eu-west-2.amazonaws.com/website/backend
   pullPolicy: IfNotPresent
-  tag: 131823d69c02ba67dc04e8a7862e810501b4b90c
+  tag: 46cd7ef3f5106d0e4d8608a5855eb4662a9d4fd5
 
 
 service:
@@ -28,9 +28,14 @@ env:
   POSTGRES_HOST: "db-instance-for-backend.cz2c6sacocxn.eu-west-2.rds.amazonaws.com"
   POSTGRES_PORT: "5432"
   REDIS_URL: "redis://redis:6379/1"
+  AWS_MEDIA_BUCKET: "remni-media-474013238842"
+  AWS_REGION: "eu-west-2"
 
 strategy:
   type: RollingUpdate
   rollingUpdate:
     maxUnavailable: 0
     maxSurge: 20%
+
+serviceAccount:
+  roleArn: "arn:aws:iam::474013238842:role/backend-s3-media"

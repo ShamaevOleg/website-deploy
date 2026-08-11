@@ -19,6 +19,7 @@ spec:
       labels:
         app: {{ .Chart.Name }}
     spec:
+      serviceAccountName: backend
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
