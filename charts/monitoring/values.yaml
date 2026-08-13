@@ -1,0 +1,22 @@
+kube-prometheus-stack:
+  prometheus:
+    prometheusSpec:
+      retention: 7d
+      resources:
+        requests:
+          cpu: 100m
+          memory: 400Mi
+        limits:
+          memory: 800Mi
+  grafana:
+    resources:
+      requests:
+        cpu: 50m
+        memory: 128Mi
+  alertmanager:
+    enabled: false
+  prometheus-node-exporter:
+    resources:
+      requests:
+        cpu: 50m
+        memory: 32Mi
