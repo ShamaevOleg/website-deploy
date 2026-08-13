@@ -13,5 +13,6 @@ spec:
     - port: {{ .Values.service.port | int }}
       protocol: TCP
       targetPort: http
+      name: test
   selector:
     app: {{ .Chart.Name }}
