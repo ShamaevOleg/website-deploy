@@ -10,6 +10,6 @@ spec:
     matchLabels:
       app: {{ .Chart.Name }}
   endpoints:
-    - port: test
+    - port: http-backend
       path: /metrics
       interval: 30s
