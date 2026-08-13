@@ -16,9 +16,10 @@ cluster to match it. Deployment happens by git commit, not by `kubectl apply`.
 
 | Path | What's here |
 |---|---|
-| `charts/backend/` | The Django backend: Deployment, Service, ConfigMap, a migration Job ordered by Argo sync-waves, probes, and a non-root security context. Reads its database password from a Kubernetes Secret synced out of AWS Secrets Manager. |
+| `charts/backend/` | The Django backend: Deployment, Service, ConfigMap, a migration Job ordered by Argo sync-waves, probes, and a non-root security context. Reads its database password from a Kubernetes Secret synced out of AWS Secrets Manager, and exposes `/metrics` scraped by a ServiceMonitor. |
 | `charts/frontend/` | The nginx frontend (unprivileged, port 8080): serves the SPA and reverse-proxies `/api`, `/admin`, `/media`, `/static` to the backend inside the cluster. |
 | `charts/redis/` | A minimal in-cluster Redis for a shared cache (a stand simplification — production would use ElastiCache). |
+| `charts/monitoring/` | A wrapper chart that declares `kube-prometheus-stack` as a Helm dependency, so Prometheus, Grafana and the exporters are deployed and configured from git like everything else. |
 | `external-secrets/` | The ClusterSecretStore and ExternalSecret that pull the RDS password from Secrets Manager into a Kubernetes Secret via the External Secrets Operator. |
 | `apps/` | Argo CD Application definitions — one per component — pointing at the charts above. |
 | `ingress/` | The ALB Ingress that exposes the frontend, with TLS terminated on the load balancer via an ACM certificate. |
@@ -31,6 +32,15 @@ cluster to match it. Deployment happens by git commit, not by `kubectl apply`.
 3. Sync-waves order the rollout: config and secrets first, the migration Job
    next, then the application pods — so the database schema is migrated before
    new pods serve traffic.
+
+## Observability
+
+The stack is monitored with Prometheus and Grafana (via `kube-prometheus-stack`),
+deployed through the same GitOps flow as everything else. Cluster, node, and
+application metrics all flow into one place: node and cluster metrics come out of
+the box, and the Django backend exposes `/metrics` through `django-prometheus`,
+scraped by a `ServiceMonitor` in `charts/backend`. See `MONITORING.md` for how it
+is wired and the problems worked through along the way.
 
 ## Notes
 
